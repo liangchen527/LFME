@@ -48,7 +48,7 @@ After all jobs have either succeeded or failed, you can delete the data from fai
 
 To view the results of your sweep:
 
-````sh
+```sh
 python -m domainbed.scripts.collect_results\
        --input_dir=/my/sweep/output/path
 ```
