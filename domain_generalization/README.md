@@ -1,54 +1,68 @@
-# Improved Test-Time Adaptation for Domain Generalization (CVPR'23)
+# pytorch-LFE
 
-Official PyTorch implementation of [Improved Test-Time Adaptation for Domain Generalization](https://arxiv.org/abs/2304.04494).
+This is a pytorch implementation of: LFME: A Simple Framework for Learning from Multiple Experts in Domain
+Generalization. We use the data-spllit, pre-process, hyper-parameter settings, and evaluation protocals all from the [DomainBed benchmark](https://github.com/facebookresearch/DomainBed). Our work is mainly at the **algorithms.py** files, please refer to them for details.
 
-Liang Chen, Yong Zhang, Yibing Song, Ying Shan, and Lingqiao Liu
+## Quick start
 
-
-
-## Preparation
-
-### Dependencies
+Download the datasets:
 
 ```sh
-pip install -r requirements.txt
+python3 -m domainbed.scripts.download \
+       --data_dir=./domainbed/data
 ```
 
-### Datasets
+Train a model:
 
 ```sh
-python -m domainbed.scripts.download --data_dir=/my/datasets/path
+python3 -m domainbed.scripts.train\
+       --data_dir=./domainbed/data/PACS/\
+       --algorithm LFME\
+       --dataset PACS\
+       --test_env 0
 ```
 
-### Environments
+Launch a sweep:
 
-Environment details used for the main experiments. Every main experiment is conducted on a single NVIDIA V100 GPU.
-
-```
-Environment:
-	Python: 3.7.7
-	PyTorch: 1.7.1
-	Torchvision: 0.8.2
-	CUDA: 10.1
-	CUDNN: 7603
-	NumPy: 1.21.4
-	PIL: 7.2.0
+```sh
+python -m domainbed.scripts.sweep launch\
+       --data_dir=/my/datasets/path\
+       --output_dir=/my/sweep/output/path\
+       --command_launcher MyLauncher
 ```
 
-## How to run, and collect results
+Here, `MyLauncher` is your cluster's command launcher, as implemented in `command_launchers.py`. At the time of writing, the entire sweep trains tens of thousands of models (all algorithms x all datasets x 3 independent trials x 20 random hyper-parameter choices). You can pass arguments to make the sweep smaller:
 
-Please refer to details in the original project page: [Domainbed](https://github.com/facebookresearch/DomainBed)
+```sh
+python -m domainbed.scripts.sweep launch\
+       --data_dir=/my/datasets/path\
+       --output_dir=/my/sweep/output/path\
+       --command_launcher MyLauncher\
+       --algorithms ERM LFME\
+       --datasets PACS VLCS\
+       --n_hparams 5\
+       --n_trials 1
+```
+
+After all jobs have either succeeded or failed, you can delete the data from failed jobs with ``python -m domainbed.scripts.sweep delete_incomplete`` and then re-launch them by running ``python -m domainbed.scripts.sweep launch`` again. Specify the same command-line arguments in all calls to `sweep` as you did the first time; this is how the sweep script knows which jobs were launched originally.
+
+To view the results of your sweep:
+
+````sh
+python -m domainbed.scripts.collect_results\
+       --input_dir=/my/sweep/output/path
+
 
 
 
 ## Citation
 
 ```
-@inproceedings{chen2023improved,
-  title={Improved Test-Time Adaptation for Domain Generalization},
-  author={Chen, Liang and Zhang, Yong and Song, Yibing and Shan, Ying and Liu, Lingqiao},
-  booktitle={CVPR},
-  year={2023}
+@inproceedings{chen2024lfme,
+  title={LFME: A Simple Framework for Learning from Multiple Experts in Domain Generalization},
+  author={Chen, Liang and Zhang, Yong and Song, Yibing and Shen, Zhiqiang and Liu, Lingqiao},
+  booktitle={NeurIPS},
+  year={2024}
 }
 
 ```
