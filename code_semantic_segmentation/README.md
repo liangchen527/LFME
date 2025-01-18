@@ -1,6 +1,6 @@
-# pytorch-LFE
+# pytorch-LFME
 
-This is a pytorch implementation of a in-reivew paper: LFME: A Simple Framework for Learning from Multiple Experts in Domain
+This is a pytorch implementation of: LFME: A Simple Framework for Learning from Multiple Experts in Domain
 Generalization. We use the data-spllit, pre-process, hyper-parameter settings, and evaluation protocals all from the 
 previous art [arxiv](https://arxiv.org/abs/2204.03609)(https://github.com/Genie-Kim/PintheMemory). Our work is mainly at the **train.py** and **deepv3plus.py** files, please refer to them for details.
 
