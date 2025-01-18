@@ -2,6 +2,19 @@
 
 Official implementation for "[LFME: A Simple Framework for Learning from Multiple Experts in Domain Generalization](https://arxiv.org/abs/2410.17020)" in NeurIPS 2024.
 
+# The Free Lunch for Generalization
+
+```
+logits = self.predict(all_x)
+loss_ce = F.cross_entropy(logits, all_y)
+all_y_one_hot = F.one_hot(all_y, num_classes=logits.shape[1]).float()
+loss_mse = F.mse_loss(logits, all_y_one_hot)
+loss = loss_ce + alpha*loss_mse #alpha can be value, personally recommend it within the range of [0.01, 10]
+```
+
+
+#Citation
+
 ```
 @inproceedings{chen2024lfme,
   title={Improved test-time adaptation for domain generalization},
