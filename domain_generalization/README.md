@@ -48,23 +48,7 @@ After all jobs have either succeeded or failed, you can delete the data from fai
 
 To view the results of your sweep:
 
-````sh
+```sh
 python -m domainbed.scripts.collect_results\
        --input_dir=/my/sweep/output/path
-
-
-
-
-## Citation
-
 ```
-@inproceedings{chen2024lfme,
-  title={LFME: A Simple Framework for Learning from Multiple Experts in Domain Generalization},
-  author={Chen, Liang and Zhang, Yong and Song, Yibing and Shen, Zhiqiang and Liu, Lingqiao},
-  booktitle={NeurIPS},
-  year={2024}
-}
-
-```
-
-Please contact me via email (liangchen527@gmail.com) if your have any questions regarding this project.
