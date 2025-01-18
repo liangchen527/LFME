@@ -13,7 +13,8 @@ loss = loss_ce + alpha*loss_mse #alpha can be value, personally recommend it wit
 ```
 
 
-#Citation
+# Citation
+If you find this work useful, please consider citing it.
 
 ```
 @inproceedings{chen2024lfme,
