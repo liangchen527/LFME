@@ -20,7 +20,7 @@ If you find this work useful, please consider citing it.
 
 ```
 @inproceedings{chen2024lfme,
-  title={Improved test-time adaptation for domain generalization},
+  title={LFME: A Simple Framework for Learning from Multiple Experts in Domain Generalization},
   author={Chen, Liang and Zhang, Yong and Song, Yibing and Shen, Zhiqiang and Liu, Lingqiao},
   booktitle={NeurIPS},
   year={2024}
