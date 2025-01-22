@@ -4,6 +4,8 @@ Official implementation for "[LFME: A Simple Framework for Learning from Multipl
 
 # The Free Lunch for Generalization
 
+Simple combination of two baselines (i.e. CE and MSE losses)
+
 ```
 logits = self.predict(all_x)
 loss_ce = F.cross_entropy(logits, all_y)
